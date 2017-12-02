@@ -3,16 +3,17 @@
 <head>
   <meta charset="utf-8">
   <title>post | Hexo</title>
-  <meta name="keywords" content="">
+  <meta name="keywords" content=" hexo , 3-hexo ">
   <meta name="description" content="post | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troublesho">
+<meta name="keywords" content="hexo,3-hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="post">
 <meta property="og:url" content="http://yoursite.com/2017/12/02/post/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta property="og:updated_time" content="2017-12-02T14:40:07.058Z">
+<meta property="og:updated_time" content="2017-12-02T15:00:04.938Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="post">
 <meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
@@ -78,11 +79,13 @@
 <ul>
     <li class="all active">全部文章</li>
     
+    <li data-rel="����"> ���� </li>
+    
 </ul>
 <div class="left-bottom">
     <a class="about" href="/about">关于</a><a class="friends">友链</a>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="2">
+<input type="hidden" id="yelog_site_posts_number" value="3">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -114,17 +117,25 @@
     </form>
     <div class="tags-list">
     
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">hexo</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">3-hexo</a>
+    </li>
+    
     <div class="clearfix"></div>
 </div>
 
     <nav>
         
         <a  class=""
-           href="/2017/12/02/post/"
+           href="/2017/12/02/haha/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title="post">post</span>
-            <span class="post-date" title="2017-12-02 22:35:31">2017/12/02</span>
+            <span class="post-title" title="haha">haha</span>
+            <span class="post-date" title="2017-12-02 23:01:54">2017/12/02</span>
         </a>
         
         <a  class=""
@@ -133,6 +144,14 @@
            data-author="" >
             <span class="post-title" title="Hello World">Hello World</span>
             <span class="post-date" title="2017-12-02 17:21:07">2017/12/02</span>
+        </a>
+        
+        <a  class="���� "
+           href="/2017/12/02/post/"
+           data-tag="hexo,3-hexo"
+           data-author="" >
+            <span class="post-title" title="post">post</span>
+            <span class="post-date" title="2017-12-02 22:35:31">2017/12/02</span>
         </a>
         
     </nav>
@@ -155,11 +174,25 @@
         
         
         
+        <span class="book">
+            
+            <a href="javascript:" data-rel="����">����</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" class="color5">hexo</a>
+            
+            <a href="javascript:" class="color2">3-hexo</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2017-12-02 22:40:07'>2017-12-02 22:35</time>
+        创建时间:<time class="date" title='更新时间: 2017-12-02 23:00:04'>2017-12-02 22:35</time>
         
     </div>
     <div class="article-meta">
@@ -226,7 +259,7 @@
     
     <p><span>本文作者:</span><a href="javascript:void(0)" title="John Doe">John Doe</a></p>
     <p><span>发布时间:</span>2017-12-02, 22:35:31</p>
-    <p><span>最后更新:</span>2017-12-02, 22:40:07</p>
+    <p><span>最后更新:</span>2017-12-02, 23:00:04</p>
     <span>原始链接:</span><a class="post-url" href="/2017/12/02/post/" title="post">http://yoursite.com/2017/12/02/post/</a>
     <p>
         <span>版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
@@ -300,7 +333,7 @@ gitalk.render('comments')
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': [],
+            'data': ['#hexo','#3-hexo',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
