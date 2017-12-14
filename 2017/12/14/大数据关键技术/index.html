@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>大数据关键技术 | victor����Ȼ����֪ʶ��</title>
+  <meta name="keywords" content=" hexo ">
+  <meta name="description" content="大数据关键技术 | victor����Ȼ����֪ʶ��">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="本文引用地址：http://www.eepw.com.cn/article/201710/367746.htm 近年来，大数据来势汹汹，渗透到各行各业，带来了一场翻天覆地的变革。让人们越发认识到，比掌握庞大的数据信息更重要的是掌握对含有意义的数据进行专业化处理的技术。 本文针对大数据的关键技术进行梳理，以飨读者。 Pa">
+<meta name="keywords" content="hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据关键技术">
+<meta property="og:url" content="http://yoursite.com/2017/12/14/大数据关键技术/index.html">
+<meta property="og:site_name" content="victor����Ȼ����֪ʶ��">
+<meta property="og:description" content="本文引用地址：http://www.eepw.com.cn/article/201710/367746.htm 近年来，大数据来势汹汹，渗透到各行各业，带来了一场翻天覆地的变革。让人们越发认识到，比掌握庞大的数据信息更重要的是掌握对含有意义的数据进行专业化处理的技术。 本文针对大数据的关键技术进行梳理，以飨读者。 Part 1.大数据采集 　数据采集是大数据生命周期的第一个环节，它通过RFID射">
+<meta property="og:updated_time" content="2017-12-14T07:59:51.526Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大数据关键技术">
+<meta name="twitter:description" content="本文引用地址：http://www.eepw.com.cn/article/201710/367746.htm 近年来，大数据来势汹汹，渗透到各行各业，带来了一场翻天覆地的变革。让人们越发认识到，比掌握庞大的数据信息更重要的是掌握对含有意义的数据进行专业化处理的技术。 本文针对大数据的关键技术进行梳理，以飨读者。 Part 1.大数据采集 　数据采集是大数据生命周期的第一个环节，它通过RFID射">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="stylesheet" href="/css/hl_theme/atom-light.css">
+
+<link href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+</div>
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>John Doe</span>
+</div>
+<div class="icon">
+    
+    <a class="rss" title="rss" href="/atom.xml" target="_blank"></a>
+    
+    
+    <a class="github" title="github" href="https://github.com/victorzwp" target="_blank"></a>
+    
+    
+    <a class="facebook" title="facebook" href="https://www.facebook.com/faker.tops" target="_blank"></a>
+    
+    
+    
+    <a class="linkedin" title="linkedin" href="https://www.linkedin.com/in/%E7%8E%89%E6%9D%B0-%E6%9D%A8-13a40a103/" target="_blank"></a>
+    
+    
+    
+    <a class="reddit" title="reddit" href="https://www.reddit.com/user/yelog/" target="_blank"></a>
+    
+    
+    <a class="weibo" title="weibo" href="http://weibo.com/u/2253511805" target="_blank"></a>
+    
+    
+    <a class="email" title="email" href="mailto:victorzwp@foxmail.com"></a>
+    
+</div>
+<ul>
+    <li class="all active">全部文章</li>
+    
+    <li data-rel="其他"> 其他 </li>
+    
+    <li data-rel="大数据"> 大数据 </li>
+    
+    <li data-rel="真家"> 真家 </li>
+    
+</ul>
+<div class="left-bottom">
+    <a class="about" href="/about">关于</a><a class="friends">友链</a>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="5">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off">
+        <i class="cross"></i>
+        <span>
+        <label for="tagswitch">Tags:</label>
+        <input id="tagswitch" type="checkbox">
+    </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">hexo</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">3-hexo</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    <nav>
+        
+        <a  class=""
+           href="/2017/12/02/haha/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="haha">haha</span>
+            <span class="post-date" title="2017-12-02 23:01:54">2017/12/02</span>
+        </a>
+        
+        <a  class=""
+           href="/2017/12/02/hello-world/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Hello World">Hello World</span>
+            <span class="post-date" title="2017-12-02 17:21:07">2017/12/02</span>
+        </a>
+        
+        <a  class="其他 "
+           href="/2017/12/03/hexo说明/"
+           data-tag="hexo"
+           data-author="" >
+            <span class="post-title" title="hexo说明">hexo说明</span>
+            <span class="post-date" title="2017-12-03 18:23:17">2017/12/03</span>
+        </a>
+        
+        <a  class="大数据 "
+           href="/2017/12/14/大数据关键技术/"
+           data-tag="hexo"
+           data-author="" >
+            <span class="post-title" title="大数据关键技术">大数据关键技术</span>
+            <span class="post-date" title="2017-12-14 15:28:51">2017/12/14</span>
+        </a>
+        
+        <a  class="真家 "
+           href="/2017/12/02/post/"
+           data-tag="hexo,3-hexo"
+           data-author="" >
+            <span class="post-title" title="post">post</span>
+            <span class="post-date" title="2017-12-02 22:35:31">2017/12/02</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-大数据关键技术" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">大数据关键技术</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+            <a href="javascript:" data-rel="大数据">大数据</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" class="color5">hexo</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2017-12-14 15:59:51'>2017-12-14 15:28</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-1-大数据采集"><span class="toc-text">Part 1.大数据采集</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#A-数据库采集"><span class="toc-text">　A.数据库采集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-网络数据采集"><span class="toc-text">　B.网络数据采集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-文件采集"><span class="toc-text">　C.文件采集</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-2-大数据预处理"><span class="toc-text">　Part 2.大数据预处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#A-数据清理"><span class="toc-text">　A.数据清理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-数据集成"><span class="toc-text">　B.数据集成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-数据变换"><span class="toc-text">　C.数据变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#D-数据规约"><span class="toc-text">　D. 数据规约</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-3-大数据存储"><span class="toc-text">　Part 3.大数据存储</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#A-MPP架构的新型数据库集群"><span class="toc-text">　A. MPP架构的新型数据库集群</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-基于Hadoop的技术扩展和封装"><span class="toc-text">　B. 基于Hadoop的技术扩展和封装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-大数据一体机"><span class="toc-text">　C. 大数据一体机</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-4-大数据分析挖掘"><span class="toc-text">　Part 4.大数据分析挖掘</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#A-可视化分析"><span class="toc-text">　A. 可视化分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-数据挖掘算法"><span class="toc-text">　B. 数据挖掘算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-预测性分析"><span class="toc-text">　C. 预测性分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#D-语义引擎"><span class="toc-text">　D. 语义引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#E-数据质量管理"><span class="toc-text">　E. 数据质量管理</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 本文引用地址：<a href="http://www.eepw.com.cn/article/201710/367746.htm" target="_blank" rel="noopener">http://www.eepw.com.cn/article/201710/367746.htm</a><br> 近年来，大数据来势汹汹，渗透到各行各业，带来了一场翻天覆地的变革。让人们越发认识到，比掌握庞大的数据信息更重要的是掌握对含有意义的数据进行专业化处理的技术。<br> 本文针对大数据的关键技术进行梳理，以飨读者。</p>
+<h1 id="Part-1-大数据采集"><a href="#Part-1-大数据采集" class="headerlink" title="Part 1.大数据采集"></a>Part 1.大数据采集</h1><p> 　数据采集是大数据生命周期的第一个环节，它通过RFID射频数据、传感器数据、社交网络数据、移动互联网数据等方式获得各种类型的结构化、半结构化及非结构化的海量数据。由于可能有成千上万的用户同时进行并发访问和操作，因此，必须采用专门针对大数据的采集方法，其主要包括以下三种：</p>
+<h2 id="A-数据库采集"><a href="#A-数据库采集" class="headerlink" title="　A.数据库采集"></a>　A.数据库采集</h2><p> 　一些企业会使用传统的关系型数据库MySQL和Oracle等来存储数据。谈到比较多的工具有Sqoop和结构化数据库间的ETL工具，当然当前对于开源的Kettle和Talend本身也集成了大数据集成内容，可以实现和hdfs，hbase和主流Nosq数据库之间的数据同步和集成。</p>
+<h2 id="B-网络数据采集"><a href="#B-网络数据采集" class="headerlink" title="　B.网络数据采集"></a>　B.网络数据采集</h2><p> 　网络数据采集主要是借助网络爬虫或网站公开API等方式，从网站上获取数据信息的过程。通过这种途径可将网络上非结构化数据、半结构化数据从网页中提取出来，并以结构化的方式将其存储为统一的本地数据文件。</p>
+<h2 id="C-文件采集"><a href="#C-文件采集" class="headerlink" title="　C.文件采集"></a>　C.文件采集</h2><p> 　对于文件的采集，谈的比较多的还是flume进行实时的文件采集和处理，当然对于ELK（ElasTIcsearch、Logstash、Kibana三者的组合）虽然是处理日志，但是也有基于模板配置的完整增量实时文件采集实现。如果是仅仅是做日志的采集和分析，那么用ELK解决方案就完全够用的。</p>
+<h1 id="Part-2-大数据预处理"><a href="#Part-2-大数据预处理" class="headerlink" title="　Part 2.大数据预处理"></a>　Part 2.大数据预处理</h1><p> 　数据的世界是庞大而复杂的，也会有残缺的，有虚假的，有过时的。想要获得高质量的分析挖掘结果，就必须在数据准备阶段提高数据的质量。大数据预处理可以对采集到的原始数据进行清洗、填补、平滑、合并、规格化以及检查一致性等，将那些杂乱无章的数据转化为相对单一且便于处理的构型，为后期的数据分析奠定基础。数据预处理主要包括：数据清理、数据集成、数据转换以及数据规约四大部分。</p>
+<h2 id="A-数据清理"><a href="#A-数据清理" class="headerlink" title="　A.数据清理"></a>　A.数据清理</h2><p> 　数据清理主要包含遗漏值处理（缺少感兴趣的属性）、噪音数据处理（数据中存在着错误、或偏离期望值的数据）、不一致数据处理。主要的清洗工具是ETL（ExtracTIon/TransformaTIon/Loading）和Potter’s Wheel。<br> 　遗漏数据可用全局常量、属性均值、可能值填充或者直接忽略该数据等方法处理;噪音数据可用分箱（对原始数据进行分组，然后对每一组内的数据进行平滑处理）、聚类、计算机人工检查和回归等方法去除噪音;对于不一致数据则可进行手动更正。</p>
+<h2 id="B-数据集成"><a href="#B-数据集成" class="headerlink" title="　B.数据集成"></a>　B.数据集成</h2><p> 　数据集成是指将多个数据源中的数据合并存放到一个一致的数据存储库中。这一过程着重要解决三个问题：模式匹配、数据冗余、数据值冲突检测与处理。<br> 　来自多个数据集合的数据会因为命名的差异导致对应的实体名称不同，通常涉及实体识别需要利用元数据来进行区分，对来源不同的实体进行匹配。数据冗余可能来源于数据属性命名的不一致，在解决过程中对于数值属性可以利用皮尔逊积矩Ra，b来衡量，绝对值越大表明两者之间相关性越强。数据值冲突问题，主要表现为来源不同的统一实体具有不同的数据值。</p>
+<h2 id="C-数据变换"><a href="#C-数据变换" class="headerlink" title="　C.数据变换"></a>　C.数据变换</h2><p> 　数据转换就是处理抽取上来的数据中存在的不一致的过程。数据转换一般包括两类：<br> 　第一类，数据名称及格式的统一，即数据粒度转换、商务规则计算以及统一的命名、数据格式、计量单位等;第二类，数据仓库中存在源数据库中可能不存在的数据，因此需要进行字段的组合、分割或计算。数据转换实际上还包含了数据清洗的工作，需要根据业务规则对异常数据进行清洗，保证后续分析结果的准确性。</p>
+<h2 id="D-数据规约"><a href="#D-数据规约" class="headerlink" title="　D. 数据规约"></a>　D. 数据规约</h2><p> 　数据归约是指在尽可能保持数据原貌的前提下，最大限度地精简数据量，主要包括：数据方聚集、维规约、数据压缩、数值规约和概念分层等。数据规约技术可以用来得到数据集的规约表示，使得数据集变小，但同时仍然近于保持原数据的完整性。也就是说，在规约后的数据集上进行挖掘，依然能够得到与使用原数据集近乎相同的分析结果。</p>
+<h1 id="Part-3-大数据存储"><a href="#Part-3-大数据存储" class="headerlink" title="　Part 3.大数据存储"></a>　Part 3.大数据存储</h1><p> 　大数据存储与管理要用存储器把采集到的数据存储起来，建立相应的数据库，以便管理和调用。大数据存储技术路线最典型的共有三种：</p>
+<h2 id="A-MPP架构的新型数据库集群"><a href="#A-MPP架构的新型数据库集群" class="headerlink" title="　A. MPP架构的新型数据库集群"></a>　A. MPP架构的新型数据库集群</h2><p> 　采用MPP架构的新型数据库集群，重点面向行业大数据，采用Shared Nothing架构，通过列存储、粗粒度索引等多项大数据处理技术，再结合MPP架构高效的分布式计算模式，完成对分析类应用的支撑，运行环境多为低成本 PC Server，具有高性能和高扩展性的特点，在企业分析类应用领域获得极其广泛的应用。这类MPP产品可以有效支撑PB级别的结构化数据分析，这是传统数据库技术无法胜任的。对于企业新一代的数据仓库和结构化数据分析，目前最佳选择是MPP数据库。</p>
+<h2 id="B-基于Hadoop的技术扩展和封装"><a href="#B-基于Hadoop的技术扩展和封装" class="headerlink" title="　B. 基于Hadoop的技术扩展和封装"></a>　B. 基于Hadoop的技术扩展和封装</h2><p> 　基于Hadoop的技术扩展和封装，围绕Hadoop衍生出相关的大数据技术，应对传统关系型数据库较难处理的数据和场景，例如针对非结构化数据的存储和计算等，充分利用Hadoop开源的优势，伴随相关技术的不断进步，其应用场景也将逐步扩大，目前最为典型的应用场景就是通过扩展和封装 Hadoop来实现对互联网大数据存储、分析的支撑。这里面有几十种NoSQL技术，也在进一步的细分。对于非结构、半结构化数据处理、复杂的ETL流程、复杂的数据挖掘和计算模型，Hadoop平台更擅长。</p>
+<h2 id="C-大数据一体机"><a href="#C-大数据一体机" class="headerlink" title="　C. 大数据一体机"></a>　C. 大数据一体机</h2><p> 　这是一种专为大数据的分析处理而设计的软、硬件结合的产品，由一组集成的服务器、存储设备、操作系统、数据库管理系统以及为数据查询、处理、分析用途而预先安装及优化的软件组成，高性能大数据一体机具有良好的稳定性和纵向扩展性。</p>
+<h1 id="Part-4-大数据分析挖掘"><a href="#Part-4-大数据分析挖掘" class="headerlink" title="　Part 4.大数据分析挖掘"></a>　Part 4.大数据分析挖掘</h1><p> 　数据的分析与挖掘主要目的是把隐藏在一大批看来杂乱无章的数据中的信息集中起来，进行萃取、提炼，以找出潜在有用的信息和所研究对象的内在规律的过程。主要从可视化分析、数据挖掘算法、预测性分析、语义引擎以及数据质量和数据管理五大方面进行着重分析。</p>
+<h2 id="A-可视化分析"><a href="#A-可视化分析" class="headerlink" title="　A. 可视化分析"></a>　A. 可视化分析</h2><p> 　数据可视化主要是借助于图形化手段，清晰有效地传达与沟通信息。主要应用于海量数据关联分析，由于所涉及到的信息比较分散、数据结构有可能不统一，借助功能强大的可视化数据分析平台，可辅助人工操作将数据进行关联分析，并做出完整的分析图表，简单明了、清晰直观，更易于接受。</p>
+<h2 id="B-数据挖掘算法"><a href="#B-数据挖掘算法" class="headerlink" title="　B. 数据挖掘算法"></a>　B. 数据挖掘算法</h2><p> 　数据挖掘算法是根据数据创建数据挖掘模型的一组试探法和计算。为了创建该模型，算法将首先分析用户提供的数据，针对特定类型的模式和趋势进行查找。并使用分析结果定义用于创建挖掘模型的最佳参数，将这些参数应用于整个数据集，以便提取可行模式和详细统计信息。<br> 　大数据分析的理论核心就是数据挖掘算法，数据挖掘的算法多种多样，不同的算法基于不同的数据类型和格式会呈现出数据所具备的不同特点。各类统计方法都能深入数据内部，挖掘出数据的价值。</p>
+<h2 id="C-预测性分析"><a href="#C-预测性分析" class="headerlink" title="　C. 预测性分析"></a>　C. 预测性分析</h2><p> 　大数据分析最重要的应用领域之一就是预测性分析，预测性分析结合了多种高级分析功能，包括特别统计分析、预测建模、数据挖掘、文本分析、实体分析、优化、实时评分、机器学习等，从而对未来，或其他不确定的事件进行预测。<br> 　从纷繁的数据中挖掘出其特点，可以帮助我们了解目前状况以及确定下一步的行动方案，从依靠猜测进行决策转变为依靠预测进行决策。它可帮助分析用户的结构化和非结构化数据中的趋势、模式和关系，运用这些指标来洞察预测将来事件，并作出相应的措施。</p>
+<h2 id="D-语义引擎"><a href="#D-语义引擎" class="headerlink" title="　D. 语义引擎"></a>　D. 语义引擎</h2><p> 　语义引擎是是把已有的数据加上语义，可以把它想象成在现有结构化或者非结构化的数据库上的一个语义叠加层。它语义技术最直接的应用，可以将人们从繁琐的搜索条目中解放出来，让用户更快、更准确、更全面地获得所需信息，提高用户的互联网体验。</p>
+<h2 id="E-数据质量管理"><a href="#E-数据质量管理" class="headerlink" title="　E. 数据质量管理"></a>　E. 数据质量管理</h2><p> 　是指对数据从计划、获取、存储、共享、维护、应用、消亡生命周期的每个阶段里可能引发的各类数据质量问题，进行识别、度量、监控、预警等一系列管理活动，并通过改善和提高组织的管理水平使得数据质量获得进一步提高。<br> 　对大数据进行有效分析的前提是必须要保证数据的质量，高质量的数据和有效的数据管理无论是在学术研究还是在商业应用领域都极其重要，各个领域都需要保证分析结果的真实性和价值性。</p>
+<p> 　 </p>
+
+      
+       <hr><span style="font-style: italic;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 victorzwp@foxmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a href="javascript:void(0)" class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span>文章标题:</span>大数据关键技术</p>
+    
+    <p><span>本文作者:</span><a href="javascript:void(0)" title="John Doe">John Doe</a></p>
+    <p><span>发布时间:</span>2017-12-14, 15:28:51</p>
+    <p><span>最后更新:</span>2017-12-14, 15:59:51</p>
+    <span>原始链接:</span><a class="post-url" href="/2017/12/14/大数据关键技术/" title="大数据关键技术">http://yoursite.com/2017/12/14/大数据关键技术/</a>
+    <p>
+        <span>版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+    
+        <div id="comments"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+<script src="/js/gitalk.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'dc7f8ca729fea878e59c',
+        clientSecret: '67417ddbb12eeebb0de47187099e92ace7bdf90e',
+        repo: 'yelog.github.io',
+        owner: 'yelog',
+        admin: ['yelog'],
+        id: location.pathname,
+        distractionFreeMode: 'true',
+        language: 'zh-CN',
+        perPage: parseInt('10',10)
+    })
+gitalk.render('comments')
+</script>
+    
+
+
+
+    
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2017 victor</p>
+<p class="footer-entry">Buit with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+</body>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.pjax/1.9.6/jquery.pjax.min.js"></script>
+<script src="/js/script.js"></script>
+<script>
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#hexo','#3-hexo',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1;
+            var $numbering = $('<ul/>').addClass('pre-numbering').attr("unselectable","on");
+            $(this).addClass('has-numbering')
+                    .parent()
+                    .append($numbering);
+            for(i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 2px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    .nav-right nav a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 2px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /*引用块样式*/
+    
+    .post .pjax article blockquote {
+        padding: 10px 20px;
+        background-color: white;
+        border: none;
+        border-left: 4px solid #42b983;
+        border-right: 4px solid #42b983;
+        border-radius: 10px;
+    }
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+        background: url("http://oncj6b2vl.bkt.clouddn.com/FlSExUGfRSaqxkK5v42CpuI-tXAL.jpg");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+</style>
+</html>
