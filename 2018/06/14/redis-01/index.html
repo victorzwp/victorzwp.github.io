@@ -89,7 +89,7 @@
 <div class="left-bottom">
     <a class="about" href="/about">关于</a><a class="friends">友链</a>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="7">
+<input type="hidden" id="yelog_site_posts_number" value="6">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -126,11 +126,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color2">3-hexo</a>
+        <a href="javascript:" class="color3">mybatis</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color3">mybatis</a>
+        <a href="javascript:" class="color2">3-hexo</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -158,6 +158,14 @@
             <span class="post-date" title="2017-12-03 18:23:17">2017/12/03</span>
         </a>
         
+        <a  class="技术架构 "
+           href="/2018/06/14/mybatis-01/"
+           data-tag="hexo,mybatis"
+           data-author="" >
+            <span class="post-title" title="使用MapperScannerConfigurer简化MyBatis配置">使用MapperScannerConfigurer简化MyBatis配置</span>
+            <span class="post-date" title="2018-06-14 18:23:17">2018/06/14</span>
+        </a>
+        
         <a  class="工具 "
            href="/2017/12/02/post/"
            data-tag="hexo,3-hexo"
@@ -167,27 +175,11 @@
         </a>
         
         <a  class="技术架构 "
-           href="/2018/06/14/mybatis-01/"
-           data-tag="hexo,mybatis"
-           data-author="" >
-            <span class="post-title" title="使用MapperScannerConfigurer简化MyBatis配置">使用MapperScannerConfigurer简化MyBatis配置</span>
-            <span class="post-date" title="2018-06-14 18:23:17">2018/06/14</span>
-        </a>
-        
-        <a  class="技术架构 "
            href="/2018/06/14/redis-01/"
            data-tag="hexo,redis"
            data-author="" >
             <span class="post-title" title="Redis的安装与配置（4.0.9）">Redis的安装与配置（4.0.9）</span>
             <span class="post-date" title="2018-06-14 18:23:17">2018/06/14</span>
-        </a>
-        
-        <a  class=""
-           href="/2018/06/14/test/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title=""></span>
-            <span class="post-date" title="2018-06-14 09:39:01">2018/06/14</span>
         </a>
         
         <a  class="大数据 "
@@ -236,7 +228,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2018-06-14 15:38:30'>2018-06-14 18:23</time>
+        创建时间:<time class="date" title='更新时间: 2018-06-14 16:05:33'>2018-06-14 18:23</time>
         
     </div>
     <div class="article-meta">
@@ -269,7 +261,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis-的安装与配置"><span class="toc-text">Redis 的安装与配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Redis的安装"><span class="toc-text">一、Redis的安装</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#bash-profile"><span class="toc-text">.bash_profile</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Get-the-aliases-and-functions"><span class="toc-text">Get the aliases and functions</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#User-specific-environment-and-startup-programs"><span class="toc-text">User specific environment and startup programs</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis-的安装与配置"><span class="toc-text">Redis 的安装与配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Redis的安装"><span class="toc-text">一、Redis的安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、Redis-server的配置"><span class="toc-text">二、Redis-server的配置</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -291,22 +283,50 @@
 <p>将解压解归档的文件夹放入你希望的目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_186_206_centos ~]# rm redis-4.0.9 /usr/local/redis-4.0.9</span><br></pre></td></tr></table></figure></p>
 <p>对源码进编译<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_186_206_centos ~]# cd /usr/local/redis-4.0.9</span><br><span class="line">[root@VM_186_206_centos redis-4.0.9]# make</span><br></pre></td></tr></table></figure></p>
 <p>编译的过程中可能会出错，最重要的是你的linux中是否已经安装gcc的编译环境<br>在编译的过程中可能会报下面的错误<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">In file included from adlist.c:34:0:</span><br><span class="line">zmalloc.h:50:31: fatal error: jemalloc/jemalloc.h: No such file or directory</span><br><span class="line"> #include &lt;jemalloc/jemalloc.h&gt;</span><br></pre></td></tr></table></figure></p>
-<p>错误的解决方法为在make后加上参数MALLOC=libc<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_186_206_centos redis-4.0.9]# make MALLOC=libc</span><br><span class="line">```   </span><br><span class="line"></span><br><span class="line">编译完成后可以对编译进行检查是否有错误</span><br></pre></td></tr></table></figure></p>
-<p>[root@VM_186_206_centos redis-4.0.9]# make test<br>\o/ All tests passed without errors!</p>
-<p>Cleanup: may take some time… OK<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">源码编译完成后就可以进行使用了，但是在使用之前需要将redis加入环境变量中方便以后使用</span><br><span class="line"></span><br><span class="line">先进入用户家目录，然后编写.bash_profile文件，将redis的路径添加到PATH中</span><br></pre></td></tr></table></figure></p>
-<p>[root@VM_186_206_centos redis-4.0.9]# cd ~<br>[root@VM_186_206_centos ~]# vim .bash_profile</p>
-<h1 id="bash-profile"><a href="#bash-profile" class="headerlink" title=".bash_profile"></a>.bash_profile</h1><h1 id="Get-the-aliases-and-functions"><a href="#Get-the-aliases-and-functions" class="headerlink" title="Get the aliases and functions"></a>Get the aliases and functions</h1><p>if [ -f ~/.bashrc ]; then<br>        . ~/.bashrc<br>fi</p>
-<h1 id="User-specific-environment-and-startup-programs"><a href="#User-specific-environment-and-startup-programs" class="headerlink" title="User specific environment and startup programs"></a>User specific environment and startup programs</h1><p>REDIS_HOME=/usr/local/redis-4.0.9<br>PATH=$PATH:$HOME/bin:$REDIS_HOME/src</p>
-<p>export PATH<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">这样安装就完成了</span><br><span class="line"></span><br><span class="line">## 二、Redis-server的配置</span><br><span class="line"></span><br><span class="line">对redis的配置我们需要在Redis的目录中复制一份配置文件，不在原来的配置文件上进行修改，避免修改错误无法找到原文件。</span><br></pre></td></tr></table></figure></p>
-<p>[root@VM_186_206_centos ~]# cp /usr/local/redis-4.0.9/redis.conf ./redisConfig/redis.conf<br>[root@VM_186_206_centos ~]# cd redisConfig<br>[root@VM_186_206_centos redisConfig]# vim redis.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Redis的配置文件非常的长，在这就不全部贴出，以行号作为标识，进行讲解如何配置</span><br><span class="line"></span><br><span class="line">首先配置redis绑定哪个IP地址</span><br><span class="line"></span><br><span class="line">这里绑定的IP地址一定得是ifconfig中的网卡地址，不然会出错启动失败</span><br></pre></td></tr></table></figure></p>
-<p>[root@VM_186_206_centos ~]# ifconfig<br>eth0: flags=4163<up,broadcast,running,multicast>  mtu 1500<br>       inet xxx.xxx.xxx.xxx  netmask 255.255.224.0  broadcast xxx.xxx.xxx.255<br>       ether XX:XX:XX:XX:XX:XX  txqueuelen 1000  (Ethernet)<br>       RX packets 29994  bytes 4629635 (4.4 MiB)<br>       RX errors 0  dropped 0  overruns 0  frame 0<br>       TX packets 28531  bytes 4220669 (4.0 MiB)<br>       TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</up,broadcast,running,multicast></p>
-<p>lo: flags=73<up,loopback,running>  mtu 65536<br>       inet 127.0.0.1  netmask 255.0.0.0<br>       loop  txqueuelen 1  (Local Loopback)<br>       RX packets 4632659  bytes 1237206796 (1.1 GiB)<br>       RX errors 0  dropped 0  overruns 0  frame 0<br>       TX packets 4632659  bytes 1237206796 (1.1 GiB)<br>       TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">如果绑定127.0.0.1网络回环地址着只有本机可以使用，外部无法访问，所以这我们需要绑定外部IP地址（如果使用云服务，这里绑定你的内网地址即可）</span><br><span class="line">69行bind xxx.xxx.xxx.xxx</span><br><span class="line"></span><br><span class="line">接着是监听的端口号</span><br><span class="line"></span><br><span class="line">92行port 8464</span><br><span class="line"></span><br><span class="line">最大TCP连接数</span><br><span class="line"></span><br><span class="line">101行 tcp-backlog 128(这里我改为和linux内核相同的值了，如果大型应用需要将内核的值修改到2048左右以应对更多的连接)</span><br><span class="line"></span><br><span class="line">将Redis设置为守护进程（可选）</span><br><span class="line"></span><br><span class="line">136行 daemonize yes</span><br><span class="line"></span><br><span class="line">设置Redis日志路径</span><br><span class="line"></span><br><span class="line">171行 logfile &quot;./redis.log&quot;</span><br><span class="line"></span><br><span class="line">Redis的数据库个数（默认16个数据库）</span><br><span class="line"></span><br><span class="line">186行 databases 16</span><br><span class="line"></span><br><span class="line">在196行介绍的就是关于数据持久化的设置，这里简单解释下</span><br><span class="line"></span><br><span class="line">save 900 1有一条数据发生了变化在 900秒(15分钟)后进行持久化</span><br><span class="line"></span><br><span class="line">save 300 10 有十条数据发生了变化在 300秒（5分钟）后进行持久化</span><br><span class="line"></span><br><span class="line">save 60 10000 有一万条数据发生了变化在60秒（1分钟）后进行持久化</span><br><span class="line"></span><br><span class="line">设置RDB持久化保存的文件名,和路径</span><br><span class="line"></span><br><span class="line">253行 dbfilename dump.rdb</span><br><span class="line"></span><br><span class="line">263行 dir ./(当前配置文件的路径)</span><br><span class="line"></span><br><span class="line">在265行进行设置的是Redis集群的读写分离（奴从模式）主人进行数据的写入， 奴隶进行数据的读取（后面详细介绍）</span><br><span class="line"></span><br><span class="line">在487行是关于数据库安全的设置</span><br><span class="line"></span><br><span class="line">500行 requirepass xxxx设置访问Redis的口令（尽量写复杂的口令）</span><br><span class="line"></span><br><span class="line">在521行是关于最大客户端的连接数的设置</span><br><span class="line"></span><br><span class="line">532行maxclients 10000</span><br><span class="line"></span><br><span class="line">534行是关于内存的调度和限制的设置</span><br><span class="line"></span><br><span class="line">在603行是关于懒释放的（这是在Redis4.0中新加的配置）</span><br><span class="line"></span><br><span class="line">​ Redis重度使用患者应该都遇到过使用 DEL 命令删除体积较大的键， 又或者在使用 FLUSHDB 和 FLUSHALL 删除包含大量键的数据库时，造成Redis阻塞的情况；另外Redis在清理过期数据和淘汰内存超限的数据时，如果碰巧撞到了大体积的键也会造成服务器阻塞。 </span><br><span class="line">为了解决以上问题， Redis4.0 引入了Redis的机制，它可以将删除键或数据库的操作放在后台线程里执行， 从而尽可能地避免服务器阻塞。</span><br><span class="line">在652行关于Append Only Mode的配置，改模式会记录下所有对数据库的添加操作（删除了某条数据会将添加的数据删除），是防止服务器意外宕机数据丢失是另外一种手段，所有当服务器意外宕机优先使用Append Only Mode进行数据恢复，如果AOM无法恢复再使用RDB进行数据恢复，这样数据丢失的概率较低。</span><br><span class="line"></span><br><span class="line">672行 appedonly yes 启动Append Only Mode</span><br><span class="line"></span><br><span class="line">676行 appendfilename &quot;appendonly.aof&quot; 该模式下文件保存的名称（路径默认与redis.conf在同一路径）</span><br><span class="line"></span><br><span class="line">差不多就是这些配置了，后面的配置当需要的时候再来进行修改就可以了。</span><br><span class="line"></span><br><span class="line">加载我们的配置启动Redis服务</span><br></pre></td></tr></table></figure></up,loopback,running></p>
-<p>[root@VM_186_206_centos redisConfig]# redis-server redis.conf<br>[root@VM_186_206<em>centos redisConfig]# cat redis.log<br>15119:C 02 Jun 11:29:14.658 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo<br>15119:C 02 Jun 11:29:14.658 # Redis version=4.0.9, bits=64, commit=00000000, modified=0, pid=15119, just started<br>15119:C 02 Jun 11:29:14.658 # Configuration loaded
-                </em>.<em>                                                  
-           </em>.-<code>__ &#39;&#39;-._                                             
-      _.-</code>    <code>.</code><em>.  ‘’-.</em>           Redis 4.0.9 (00000000/0) 64 bit<br>  .-`` .-<figure class="highlight plain"><figcaption><span>```\/    _.,_ ''-._                                   </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> (    &apos;      ,       .-`  | `,    )     Running in standalone mode</span><br><span class="line"> |`-._`-...-` __...-.``-._|&apos;` _.-&apos;|     Port: XXXX</span><br><span class="line"> |    `-._   `._    /     _.-&apos;    |     PID: 15120</span><br><span class="line">  `-._    `-._  `-./  _.-&apos;    _.-&apos;                                   </span><br><span class="line"> |`-._`-._    `-.__.-&apos;    _.-&apos;_.-&apos;|                                  </span><br><span class="line"> |    `-._`-._        _.-&apos;_.-&apos;    |           http://redis.io        </span><br><span class="line">  `-._    `-._`-.__.-&apos;_.-&apos;    _.-&apos;                                   </span><br><span class="line"> |`-._`-._    `-.__.-&apos;    _.-&apos;_.-&apos;|                                  </span><br><span class="line"> |    `-._`-._        _.-&apos;_.-&apos;    |                                  </span><br><span class="line">  `-._    `-._`-.__.-&apos;_.-&apos;    _.-&apos;                                   </span><br><span class="line">      `-._    `-.__.-&apos;    _.-&apos;                                       </span><br><span class="line">          `-._        _.-&apos;                                           </span><br><span class="line">              `-.__.-&apos;                                               </span><br><span class="line"></span><br><span class="line">15120:M 02 Jun 11:29:14.660 # Server initialized</span><br><span class="line">15120:M 02 Jun 11:29:14.661 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command &apos;echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled&apos; as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.</span><br><span class="line">15120:M 02 Jun 11:29:14.661 * Ready to accept connections</span><br><span class="line">···</span><br><span class="line">在redis.log中看见上面的内容说明你已经配置成功，并成功运行。</span><br><span class="line"></span><br><span class="line">接下来我们通过redis-cli尝试连接下服务器</span><br></pre></td></tr></table></figure></p>
-<p>[root@VM_186_206_centos ~]# redis-cli -h xxx.xxx.xxx.xxx -p xxxx<br>xxxx.xxx.xxx:xxxx&gt; AUTH xxxx<br>OK<br>xxx.xxx.xxx.xxx:xxxx&gt; PING<br>PONG<br>```</p>
-
+<p>错误的解决方法为在make后加上参数MALLOC=libc</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_186_206_centos redis-4.0.9]# make MALLOC=libc</span><br></pre></td></tr></table></figure>
+<p>编译完成后可以对编译进行检查是否有错误  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_186_206_centos redis-4.0.9]# make test</span><br><span class="line">\o/ All tests passed without errors!</span><br><span class="line"></span><br><span class="line">Cleanup: may take some time... OK</span><br></pre></td></tr></table></figure>
+<p>源码编译完成后就可以进行使用了，但是在使用之前需要将redis加入环境变量中方便以后使用</p>
+<p>先进入用户家目录，然后编写.bash_profile文件，将redis的路径添加到PATH中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_186_206_centos redis-4.0.9]# cd ~</span><br><span class="line">[root@VM_186_206_centos ~]# vim .bash_profile</span><br><span class="line"></span><br><span class="line"># .bash_profile</span><br><span class="line"></span><br><span class="line"># Get the aliases and functions</span><br><span class="line">if [ -f ~/.bashrc ]; then</span><br><span class="line">        . ~/.bashrc</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># User specific environment and startup programs</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">REDIS_HOME=/usr/local/redis-4.0.9</span><br><span class="line">PATH=$PATH:$HOME/bin:$REDIS_HOME/src</span><br><span class="line"></span><br><span class="line">export PATH</span><br></pre></td></tr></table></figure></p>
+<p>这样安装就完成了</p>
+<h2 id="二、Redis-server的配置"><a href="#二、Redis-server的配置" class="headerlink" title="二、Redis-server的配置"></a>二、Redis-server的配置</h2><p>对redis的配置我们需要在Redis的目录中复制一份配置文件，不在原来的配置文件上进行修改，避免修改错误无法找到原文件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_186_206_centos ~]# cp /usr/local/redis-4.0.9/redis.conf ./redisConfig/redis.conf</span><br><span class="line">[root@VM_186_206_centos ~]# cd redisConfig</span><br><span class="line">[root@VM_186_206_centos redisConfig]# vim redis.conf</span><br></pre></td></tr></table></figure></p>
+<p>Redis的配置文件非常的长，在这就不全部贴出，以行号作为标识，进行讲解如何配置</p>
+<p>首先配置redis绑定哪个IP地址</p>
+<p>这里绑定的IP地址一定得是ifconfig中的网卡地址，不然会出错启动失败<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_186_206_centos ~]# ifconfig</span><br><span class="line">eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">       inet xxx.xxx.xxx.xxx  netmask 255.255.224.0  broadcast xxx.xxx.xxx.255</span><br><span class="line">       ether XX:XX:XX:XX:XX:XX  txqueuelen 1000  (Ethernet)</span><br><span class="line">       RX packets 29994  bytes 4629635 (4.4 MiB)</span><br><span class="line">       RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">       TX packets 28531  bytes 4220669 (4.0 MiB)</span><br><span class="line">       TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536</span><br><span class="line">       inet 127.0.0.1  netmask 255.0.0.0</span><br><span class="line">       loop  txqueuelen 1  (Local Loopback)</span><br><span class="line">       RX packets 4632659  bytes 1237206796 (1.1 GiB)</span><br><span class="line">       RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">       TX packets 4632659  bytes 1237206796 (1.1 GiB)</span><br><span class="line">       TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br></pre></td></tr></table></figure></p>
+<p>如果绑定127.0.0.1网络回环地址着只有本机可以使用，外部无法访问，所以这我们需要绑定外部IP地址（如果使用云服务，这里绑定你的内网地址即可）<br>69行bind xxx.xxx.xxx.xxx</p>
+<p>接着是监听的端口号</p>
+<p>92行port 8464</p>
+<p>最大TCP连接数</p>
+<p>101行 tcp-backlog 128(这里我改为和linux内核相同的值了，如果大型应用需要将内核的值修改到2048左右以应对更多的连接)</p>
+<p>将Redis设置为守护进程（可选）</p>
+<p>136行 daemonize yes</p>
+<p>设置Redis日志路径</p>
+<p>171行 logfile “./redis.log”</p>
+<p>Redis的数据库个数（默认16个数据库）</p>
+<p>186行 databases 16</p>
+<p>在196行介绍的就是关于数据持久化的设置，这里简单解释下</p>
+<p>save 900 1有一条数据发生了变化在 900秒(15分钟)后进行持久化</p>
+<p>save 300 10 有十条数据发生了变化在 300秒（5分钟）后进行持久化</p>
+<p>save 60 10000 有一万条数据发生了变化在60秒（1分钟）后进行持久化</p>
+<p>设置RDB持久化保存的文件名,和路径</p>
+<p>253行 dbfilename dump.rdb</p>
+<p>263行 dir ./(当前配置文件的路径)</p>
+<p>在265行进行设置的是Redis集群的读写分离（奴从模式）主人进行数据的写入， 奴隶进行数据的读取（后面详细介绍）</p>
+<p>在487行是关于数据库安全的设置</p>
+<p>500行 requirepass xxxx设置访问Redis的口令（尽量写复杂的口令）</p>
+<p>在521行是关于最大客户端的连接数的设置</p>
+<p>532行maxclients 10000</p>
+<p>534行是关于内存的调度和限制的设置</p>
+<p>在603行是关于懒释放的（这是在Redis4.0中新加的配置）</p>
+<p>​ Redis重度使用患者应该都遇到过使用 DEL 命令删除体积较大的键， 又或者在使用 FLUSHDB 和 FLUSHALL 删除包含大量键的数据库时，造成Redis阻塞的情况；另外Redis在清理过期数据和淘汰内存超限的数据时，如果碰巧撞到了大体积的键也会造成服务器阻塞。<br>为了解决以上问题， Redis4.0 引入了Redis的机制，它可以将删除键或数据库的操作放在后台线程里执行， 从而尽可能地避免服务器阻塞。<br>在652行关于Append Only Mode的配置，改模式会记录下所有对数据库的添加操作（删除了某条数据会将添加的数据删除），是防止服务器意外宕机数据丢失是另外一种手段，所有当服务器意外宕机优先使用Append Only Mode进行数据恢复，如果AOM无法恢复再使用RDB进行数据恢复，这样数据丢失的概率较低。</p>
+<p>672行 appedonly yes 启动Append Only Mode</p>
+<p>676行 appendfilename “appendonly.aof” 该模式下文件保存的名称（路径默认与redis.conf在同一路径）</p>
+<p>差不多就是这些配置了，后面的配置当需要的时候再来进行修改就可以了。</p>
+<p>加载我们的配置启动Redis服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_186_206_centos redisConfig]# redis-server redis.conf </span><br><span class="line">[root@VM_186_206_centos redisConfig]# cat redis.log </span><br><span class="line">15119:C 02 Jun 11:29:14.658 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo</span><br><span class="line">15119:C 02 Jun 11:29:14.658 # Redis version=4.0.9, bits=64, commit=00000000, modified=0, pid=15119, just started</span><br><span class="line">15119:C 02 Jun 11:29:14.658 # Configuration loaded</span><br><span class="line">                _._                                                  </span><br><span class="line">           _.-``__ &apos;&apos;-._                                             </span><br><span class="line">      _.-``    `.  `_.  &apos;&apos;-._           Redis 4.0.9 (00000000/0) 64 bit</span><br><span class="line">  .-`` .-```.  ```\/    _.,_ &apos;&apos;-._                                   </span><br><span class="line"> (    &apos;      ,       .-`  | `,    )     Running in standalone mode</span><br><span class="line"> |`-._`-...-` __...-.``-._|&apos;` _.-&apos;|     Port: XXXX</span><br><span class="line"> |    `-._   `._    /     _.-&apos;    |     PID: 15120</span><br><span class="line">  `-._    `-._  `-./  _.-&apos;    _.-&apos;                                   </span><br><span class="line"> |`-._`-._    `-.__.-&apos;    _.-&apos;_.-&apos;|                                  </span><br><span class="line"> |    `-._`-._        _.-&apos;_.-&apos;    |           http://redis.io        </span><br><span class="line">  `-._    `-._`-.__.-&apos;_.-&apos;    _.-&apos;                                   </span><br><span class="line"> |`-._`-._    `-.__.-&apos;    _.-&apos;_.-&apos;|                                  </span><br><span class="line"> |    `-._`-._        _.-&apos;_.-&apos;    |                                  </span><br><span class="line">  `-._    `-._`-.__.-&apos;_.-&apos;    _.-&apos;                                   </span><br><span class="line">      `-._    `-.__.-&apos;    _.-&apos;                                       </span><br><span class="line">          `-._        _.-&apos;                                           </span><br><span class="line">              `-.__.-&apos;                                               </span><br><span class="line"></span><br><span class="line">15120:M 02 Jun 11:29:14.660 # Server initialized</span><br><span class="line">15120:M 02 Jun 11:29:14.661 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command &apos;echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled&apos; as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.</span><br><span class="line">15120:M 02 Jun 11:29:14.661 * Ready to accept connections</span><br></pre></td></tr></table></figure></p>
+<p>在redis.log中看见上面的内容说明你已经配置成功，并成功运行。</p>
+<p>接下来我们通过redis-cli尝试连接下服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_186_206_centos ~]# redis-cli -h xxx.xxx.xxx.xxx -p xxxx</span><br><span class="line">xxxx.xxx.xxx:xxxx&gt; AUTH xxxx</span><br><span class="line">OK</span><br><span class="line">xxx.xxx.xxx.xxx:xxxx&gt; PING</span><br><span class="line">PONG</span><br></pre></td></tr></table></figure>
       
        <hr><span style="font-style: italic;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 victorzwp@foxmail.com </span>
     </div>
@@ -323,7 +343,7 @@
     
     <p><span>本文作者:</span><a href="javascript:void(0)" title="victor(以然)">victor(以然)</a></p>
     <p><span>发布时间:</span>2018-06-14, 18:23:17</p>
-    <p><span>最后更新:</span>2018-06-14, 15:38:30</p>
+    <p><span>最后更新:</span>2018-06-14, 16:05:33</p>
     <span>原始链接:</span><a class="post-url" href="/2018/06/14/redis-01/" title="Redis的安装与配置（4.0.9）">https://victorzwp.github.io/2018/06/14/redis-01/</a>
     <p>
         <span>版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
@@ -397,7 +417,7 @@ gitalk.render('comments')
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#hexo','#3-hexo','#mybatis','#redis',],
+            'data': ['#hexo','#mybatis','#3-hexo','#redis',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
