@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Redis的安装与配置（4.0.9） | 大数据之路</title>
+  <meta name="keywords" content=" hexo , redis ">
+  <meta name="description" content="Redis的安装与配置（4.0.9） | 大数据之路">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="文章内容来源于同行博客 u011318776的博客使用MapperScannerConfigurer简化MyBatis配置 MyBatis的一大亮点就是可以不用DAO的实现类。如果没有实现类，Spring如何为Service注入DAO的实例呢？MyBatis-Spring提供了一个MapperFactoryBean，可">
+<meta name="keywords" content="hexo,mybatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用MapperScannerConfigurer简化MyBatis配置">
+<meta property="og:url" content="https://victorzwp.github.io/2018/06/14/mybatis-01/index.html">
+<meta property="og:site_name" content="大数据之路">
+<meta property="og:description" content="文章内容来源于同行博客 u011318776的博客使用MapperScannerConfigurer简化MyBatis配置 MyBatis的一大亮点就是可以不用DAO的实现类。如果没有实现类，Spring如何为Service注入DAO的实例呢？MyBatis-Spring提供了一个MapperFactoryBean，可以将数据映射接口转为Spring Bean。 123456&amp;lt;div&amp;gt;">
+<meta property="og:updated_time" content="2018-06-14T01:27:47.343Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用MapperScannerConfigurer简化MyBatis配置">
+<meta name="twitter:description" content="文章内容来源于同行博客 u011318776的博客使用MapperScannerConfigurer简化MyBatis配置 MyBatis的一大亮点就是可以不用DAO的实现类。如果没有实现类，Spring如何为Service注入DAO的实例呢？MyBatis-Spring提供了一个MapperFactoryBean，可以将数据映射接口转为Spring Bean。 123456&amp;lt;div&amp;gt;">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="stylesheet" href="/css/hl_theme/atom-light.css">
+
+<link href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+</div>
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>victor(以然)</span>
+</div>
+<div class="icon">
+    
+    <a class="rss" title="rss" href="/atom.xml" target="_blank"></a>
+    
+    
+    <a class="github" title="github" href="https://github.com/victorzwp" target="_blank"></a>
+    
+    
+    <a class="facebook" title="facebook" href="https://www.facebook.com/faker.tops" target="_blank"></a>
+    
+    
+    
+    <a class="linkedin" title="linkedin" href="https://www.linkedin.com/in/%E7%8E%89%E6%9D%B0-%E6%9D%A8-13a40a103/" target="_blank"></a>
+    
+    
+    
+    <a class="reddit" title="reddit" href="https://www.reddit.com/user/yelog/" target="_blank"></a>
+    
+    
+    <a class="weibo" title="weibo" href="http://weibo.com/u/2253511805" target="_blank"></a>
+    
+    
+    <a class="email" title="email" href="mailto:victorzwp@foxmail.com"></a>
+    
+</div>
+<ul>
+    <li class="all active">全部文章</li>
+    
+    <li data-rel="工具"> 工具 </li>
+    
+    <li data-rel="技术架构"> 技术架构 </li>
+    
+    <li data-rel="大数据"> 大数据 </li>
+    
+</ul>
+<div class="left-bottom">
+    <a class="about" href="/about">关于</a><a class="friends">友链</a>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="7">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off">
+        <i class="cross"></i>
+        <span>
+        <label for="tagswitch">Tags:</label>
+        <input id="tagswitch" type="checkbox">
+    </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">hexo</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">3-hexo</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">mybatis</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">redis</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    <nav>
+        
+        <a  class="工具 "
+           href="/2017/12/02/hello-world/"
+           data-tag="hexo"
+           data-author="" >
+            <span class="post-title" title="hexo Hello World">hexo Hello World</span>
+            <span class="post-date" title="2017-12-02 17:21:07">2017/12/02</span>
+        </a>
+        
+        <a  class="工具 "
+           href="/2017/12/03/hexo说明/"
+           data-tag="hexo"
+           data-author="" >
+            <span class="post-title" title="hexo使用说明[官方]">hexo使用说明[官方]</span>
+            <span class="post-date" title="2017-12-03 18:23:17">2017/12/03</span>
+        </a>
+        
+        <a  class="工具 "
+           href="/2017/12/02/post/"
+           data-tag="hexo,3-hexo"
+           data-author="" >
+            <span class="post-title" title="post 测试">post 测试</span>
+            <span class="post-date" title="2017-12-02 22:35:31">2017/12/02</span>
+        </a>
+        
+        <a  class="技术架构 "
+           href="/2018/06/14/mybatis-01/"
+           data-tag="hexo,mybatis"
+           data-author="" >
+            <span class="post-title" title="使用MapperScannerConfigurer简化MyBatis配置">使用MapperScannerConfigurer简化MyBatis配置</span>
+            <span class="post-date" title="2018-06-14 18:23:17">2018/06/14</span>
+        </a>
+        
+        <a  class="技术架构 "
+           href="/2018/06/14/redis-01/"
+           data-tag="hexo,redis"
+           data-author="" >
+            <span class="post-title" title="Redis的安装与配置（4.0.9）">Redis的安装与配置（4.0.9）</span>
+            <span class="post-date" title="2018-06-14 18:23:17">2018/06/14</span>
+        </a>
+        
+        <a  class=""
+           href="/2018/06/14/test/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title=""></span>
+            <span class="post-date" title="2018-06-14 09:39:01">2018/06/14</span>
+        </a>
+        
+        <a  class="大数据 "
+           href="/2017/12/14/大数据关键技术/"
+           data-tag="hexo"
+           data-author="" >
+            <span class="post-title" title="大数据关键技术">大数据关键技术</span>
+            <span class="post-date" title="2017-12-14 15:28:51">2017/12/14</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-redis-01" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Redis的安装与配置（4.0.9）</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+            <a href="javascript:" data-rel="技术架构">技术架构</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" class="color5">hexo</a>
+            
+            <a href="javascript:" class="color1">redis</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2018-06-14 15:38:30'>2018-06-14 18:23</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis-的安装与配置"><span class="toc-text">Redis 的安装与配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Redis的安装"><span class="toc-text">一、Redis的安装</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#bash-profile"><span class="toc-text">.bash_profile</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Get-the-aliases-and-functions"><span class="toc-text">Get the aliases and functions</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#User-specific-environment-and-startup-programs"><span class="toc-text">User specific environment and startup programs</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Redis-的安装与配置"><a href="#Redis-的安装与配置" class="headerlink" title="Redis 的安装与配置"></a>Redis 的安装与配置</h1><p>Redis是一个开源（BSD许可），内存数据结构存储，用作数据库，缓存和消息代理。它支持数据结构，如字符串，散列，列表，集合，具有范围查询的排序集，位图，超级日志和具有半径查询的地理空间索引。 Redis具有内置复制，Lua脚本，LRU驱逐，事务和不同级别的磁盘持久性，并通过Redis Sentinel提供高可用性，并通过Redis群集实现自动分区。</p>
+<h2 id="一、Redis的安装"><a href="#一、Redis的安装" class="headerlink" title="一、Redis的安装"></a>一、Redis的安装</h2><p>先将安装需要的环境配置好比如gcc，我们通过YUM包管理工具来进行安装。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_186_206_centos ~]# yum install gcc</span><br></pre></td></tr></table></figure></p>
+<p>然后通过wget对redis的源码压缩归档文件进行下载（在这下载的是Redis4.0.9的稳定版， 在Redis3.2中有一个较大的漏洞，核客会通过你启动的redis-server获取电脑控制权，安装挖矿病毒）<br><blockquote><footer><strong>Redis官网</strong><cite><a href="http://download.redis.io/releases/redis-4.0.9.tar.gz" target="_blank" rel="noopener">Redis-4.0.9的下载地址</a></cite></footer></blockquote><br>通过wget下载源码资源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_186_206_centos ~]# wget http://download.redis.io/releases/redis-4.0.9.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>然后对下载的文件进行解压解归档<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_186_206_centos ~]# tar -zxvf redis-4.0.9.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>将解压解归档的文件夹放入你希望的目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_186_206_centos ~]# rm redis-4.0.9 /usr/local/redis-4.0.9</span><br></pre></td></tr></table></figure></p>
+<p>对源码进编译<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_186_206_centos ~]# cd /usr/local/redis-4.0.9</span><br><span class="line">[root@VM_186_206_centos redis-4.0.9]# make</span><br></pre></td></tr></table></figure></p>
+<p>编译的过程中可能会出错，最重要的是你的linux中是否已经安装gcc的编译环境<br>在编译的过程中可能会报下面的错误<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">In file included from adlist.c:34:0:</span><br><span class="line">zmalloc.h:50:31: fatal error: jemalloc/jemalloc.h: No such file or directory</span><br><span class="line"> #include &lt;jemalloc/jemalloc.h&gt;</span><br></pre></td></tr></table></figure></p>
+<p>错误的解决方法为在make后加上参数MALLOC=libc<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_186_206_centos redis-4.0.9]# make MALLOC=libc</span><br><span class="line">```   </span><br><span class="line"></span><br><span class="line">编译完成后可以对编译进行检查是否有错误</span><br></pre></td></tr></table></figure></p>
+<p>[root@VM_186_206_centos redis-4.0.9]# make test<br>\o/ All tests passed without errors!</p>
+<p>Cleanup: may take some time… OK<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">源码编译完成后就可以进行使用了，但是在使用之前需要将redis加入环境变量中方便以后使用</span><br><span class="line"></span><br><span class="line">先进入用户家目录，然后编写.bash_profile文件，将redis的路径添加到PATH中</span><br></pre></td></tr></table></figure></p>
+<p>[root@VM_186_206_centos redis-4.0.9]# cd ~<br>[root@VM_186_206_centos ~]# vim .bash_profile</p>
+<h1 id="bash-profile"><a href="#bash-profile" class="headerlink" title=".bash_profile"></a>.bash_profile</h1><h1 id="Get-the-aliases-and-functions"><a href="#Get-the-aliases-and-functions" class="headerlink" title="Get the aliases and functions"></a>Get the aliases and functions</h1><p>if [ -f ~/.bashrc ]; then<br>        . ~/.bashrc<br>fi</p>
+<h1 id="User-specific-environment-and-startup-programs"><a href="#User-specific-environment-and-startup-programs" class="headerlink" title="User specific environment and startup programs"></a>User specific environment and startup programs</h1><p>REDIS_HOME=/usr/local/redis-4.0.9<br>PATH=$PATH:$HOME/bin:$REDIS_HOME/src</p>
+<p>export PATH<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">这样安装就完成了</span><br><span class="line"></span><br><span class="line">## 二、Redis-server的配置</span><br><span class="line"></span><br><span class="line">对redis的配置我们需要在Redis的目录中复制一份配置文件，不在原来的配置文件上进行修改，避免修改错误无法找到原文件。</span><br></pre></td></tr></table></figure></p>
+<p>[root@VM_186_206_centos ~]# cp /usr/local/redis-4.0.9/redis.conf ./redisConfig/redis.conf<br>[root@VM_186_206_centos ~]# cd redisConfig<br>[root@VM_186_206_centos redisConfig]# vim redis.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Redis的配置文件非常的长，在这就不全部贴出，以行号作为标识，进行讲解如何配置</span><br><span class="line"></span><br><span class="line">首先配置redis绑定哪个IP地址</span><br><span class="line"></span><br><span class="line">这里绑定的IP地址一定得是ifconfig中的网卡地址，不然会出错启动失败</span><br></pre></td></tr></table></figure></p>
+<p>[root@VM_186_206_centos ~]# ifconfig<br>eth0: flags=4163<up,broadcast,running,multicast>  mtu 1500<br>       inet xxx.xxx.xxx.xxx  netmask 255.255.224.0  broadcast xxx.xxx.xxx.255<br>       ether XX:XX:XX:XX:XX:XX  txqueuelen 1000  (Ethernet)<br>       RX packets 29994  bytes 4629635 (4.4 MiB)<br>       RX errors 0  dropped 0  overruns 0  frame 0<br>       TX packets 28531  bytes 4220669 (4.0 MiB)<br>       TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</up,broadcast,running,multicast></p>
+<p>lo: flags=73<up,loopback,running>  mtu 65536<br>       inet 127.0.0.1  netmask 255.0.0.0<br>       loop  txqueuelen 1  (Local Loopback)<br>       RX packets 4632659  bytes 1237206796 (1.1 GiB)<br>       RX errors 0  dropped 0  overruns 0  frame 0<br>       TX packets 4632659  bytes 1237206796 (1.1 GiB)<br>       TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">如果绑定127.0.0.1网络回环地址着只有本机可以使用，外部无法访问，所以这我们需要绑定外部IP地址（如果使用云服务，这里绑定你的内网地址即可）</span><br><span class="line">69行bind xxx.xxx.xxx.xxx</span><br><span class="line"></span><br><span class="line">接着是监听的端口号</span><br><span class="line"></span><br><span class="line">92行port 8464</span><br><span class="line"></span><br><span class="line">最大TCP连接数</span><br><span class="line"></span><br><span class="line">101行 tcp-backlog 128(这里我改为和linux内核相同的值了，如果大型应用需要将内核的值修改到2048左右以应对更多的连接)</span><br><span class="line"></span><br><span class="line">将Redis设置为守护进程（可选）</span><br><span class="line"></span><br><span class="line">136行 daemonize yes</span><br><span class="line"></span><br><span class="line">设置Redis日志路径</span><br><span class="line"></span><br><span class="line">171行 logfile &quot;./redis.log&quot;</span><br><span class="line"></span><br><span class="line">Redis的数据库个数（默认16个数据库）</span><br><span class="line"></span><br><span class="line">186行 databases 16</span><br><span class="line"></span><br><span class="line">在196行介绍的就是关于数据持久化的设置，这里简单解释下</span><br><span class="line"></span><br><span class="line">save 900 1有一条数据发生了变化在 900秒(15分钟)后进行持久化</span><br><span class="line"></span><br><span class="line">save 300 10 有十条数据发生了变化在 300秒（5分钟）后进行持久化</span><br><span class="line"></span><br><span class="line">save 60 10000 有一万条数据发生了变化在60秒（1分钟）后进行持久化</span><br><span class="line"></span><br><span class="line">设置RDB持久化保存的文件名,和路径</span><br><span class="line"></span><br><span class="line">253行 dbfilename dump.rdb</span><br><span class="line"></span><br><span class="line">263行 dir ./(当前配置文件的路径)</span><br><span class="line"></span><br><span class="line">在265行进行设置的是Redis集群的读写分离（奴从模式）主人进行数据的写入， 奴隶进行数据的读取（后面详细介绍）</span><br><span class="line"></span><br><span class="line">在487行是关于数据库安全的设置</span><br><span class="line"></span><br><span class="line">500行 requirepass xxxx设置访问Redis的口令（尽量写复杂的口令）</span><br><span class="line"></span><br><span class="line">在521行是关于最大客户端的连接数的设置</span><br><span class="line"></span><br><span class="line">532行maxclients 10000</span><br><span class="line"></span><br><span class="line">534行是关于内存的调度和限制的设置</span><br><span class="line"></span><br><span class="line">在603行是关于懒释放的（这是在Redis4.0中新加的配置）</span><br><span class="line"></span><br><span class="line">​ Redis重度使用患者应该都遇到过使用 DEL 命令删除体积较大的键， 又或者在使用 FLUSHDB 和 FLUSHALL 删除包含大量键的数据库时，造成Redis阻塞的情况；另外Redis在清理过期数据和淘汰内存超限的数据时，如果碰巧撞到了大体积的键也会造成服务器阻塞。 </span><br><span class="line">为了解决以上问题， Redis4.0 引入了Redis的机制，它可以将删除键或数据库的操作放在后台线程里执行， 从而尽可能地避免服务器阻塞。</span><br><span class="line">在652行关于Append Only Mode的配置，改模式会记录下所有对数据库的添加操作（删除了某条数据会将添加的数据删除），是防止服务器意外宕机数据丢失是另外一种手段，所有当服务器意外宕机优先使用Append Only Mode进行数据恢复，如果AOM无法恢复再使用RDB进行数据恢复，这样数据丢失的概率较低。</span><br><span class="line"></span><br><span class="line">672行 appedonly yes 启动Append Only Mode</span><br><span class="line"></span><br><span class="line">676行 appendfilename &quot;appendonly.aof&quot; 该模式下文件保存的名称（路径默认与redis.conf在同一路径）</span><br><span class="line"></span><br><span class="line">差不多就是这些配置了，后面的配置当需要的时候再来进行修改就可以了。</span><br><span class="line"></span><br><span class="line">加载我们的配置启动Redis服务</span><br></pre></td></tr></table></figure></up,loopback,running></p>
+<p>[root@VM_186_206_centos redisConfig]# redis-server redis.conf<br>[root@VM_186_206<em>centos redisConfig]# cat redis.log<br>15119:C 02 Jun 11:29:14.658 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo<br>15119:C 02 Jun 11:29:14.658 # Redis version=4.0.9, bits=64, commit=00000000, modified=0, pid=15119, just started<br>15119:C 02 Jun 11:29:14.658 # Configuration loaded
+                </em>.<em>                                                  
+           </em>.-<code>__ &#39;&#39;-._                                             
+      _.-</code>    <code>.</code><em>.  ‘’-.</em>           Redis 4.0.9 (00000000/0) 64 bit<br>  .-`` .-<figure class="highlight plain"><figcaption><span>```\/    _.,_ ''-._                                   </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> (    &apos;      ,       .-`  | `,    )     Running in standalone mode</span><br><span class="line"> |`-._`-...-` __...-.``-._|&apos;` _.-&apos;|     Port: XXXX</span><br><span class="line"> |    `-._   `._    /     _.-&apos;    |     PID: 15120</span><br><span class="line">  `-._    `-._  `-./  _.-&apos;    _.-&apos;                                   </span><br><span class="line"> |`-._`-._    `-.__.-&apos;    _.-&apos;_.-&apos;|                                  </span><br><span class="line"> |    `-._`-._        _.-&apos;_.-&apos;    |           http://redis.io        </span><br><span class="line">  `-._    `-._`-.__.-&apos;_.-&apos;    _.-&apos;                                   </span><br><span class="line"> |`-._`-._    `-.__.-&apos;    _.-&apos;_.-&apos;|                                  </span><br><span class="line"> |    `-._`-._        _.-&apos;_.-&apos;    |                                  </span><br><span class="line">  `-._    `-._`-.__.-&apos;_.-&apos;    _.-&apos;                                   </span><br><span class="line">      `-._    `-.__.-&apos;    _.-&apos;                                       </span><br><span class="line">          `-._        _.-&apos;                                           </span><br><span class="line">              `-.__.-&apos;                                               </span><br><span class="line"></span><br><span class="line">15120:M 02 Jun 11:29:14.660 # Server initialized</span><br><span class="line">15120:M 02 Jun 11:29:14.661 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command &apos;echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled&apos; as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.</span><br><span class="line">15120:M 02 Jun 11:29:14.661 * Ready to accept connections</span><br><span class="line">···</span><br><span class="line">在redis.log中看见上面的内容说明你已经配置成功，并成功运行。</span><br><span class="line"></span><br><span class="line">接下来我们通过redis-cli尝试连接下服务器</span><br></pre></td></tr></table></figure></p>
+<p>[root@VM_186_206_centos ~]# redis-cli -h xxx.xxx.xxx.xxx -p xxxx<br>xxxx.xxx.xxx:xxxx&gt; AUTH xxxx<br>OK<br>xxx.xxx.xxx.xxx:xxxx&gt; PING<br>PONG<br>```</p>
+
+      
+       <hr><span style="font-style: italic;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 victorzwp@foxmail.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a href="javascript:void(0)" class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span>文章标题:</span>Redis的安装与配置（4.0.9）</p>
+    
+    <p><span>本文作者:</span><a href="javascript:void(0)" title="victor(以然)">victor(以然)</a></p>
+    <p><span>发布时间:</span>2018-06-14, 18:23:17</p>
+    <p><span>最后更新:</span>2018-06-14, 15:38:30</p>
+    <span>原始链接:</span><a class="post-url" href="/2018/06/14/redis-01/" title="Redis的安装与配置（4.0.9）">https://victorzwp.github.io/2018/06/14/redis-01/</a>
+    <p>
+        <span>版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+    
+        <div id="comments"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+<script src="/js/gitalk.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'dc7f8ca729fea878e59c',
+        clientSecret: '67417ddbb12eeebb0de47187099e92ace7bdf90e',
+        repo: 'yelog.github.io',
+        owner: 'yelog',
+        admin: ['yelog'],
+        id: location.pathname,
+        distractionFreeMode: 'true',
+        language: 'zh-CN',
+        perPage: parseInt('10',10)
+    })
+gitalk.render('comments')
+</script>
+    
+
+
+
+    
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2017 victor</p>
+<p class="footer-entry">Buit with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+</body>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.pjax/1.9.6/jquery.pjax.min.js"></script>
+<script src="/js/script.js"></script>
+<script>
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#hexo','#3-hexo','#mybatis','#redis',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1;
+            var $numbering = $('<ul/>').addClass('pre-numbering').attr("unselectable","on");
+            $(this).addClass('has-numbering')
+                    .parent()
+                    .append($numbering);
+            for(i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 2px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    .nav-right nav a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 2px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /*引用块样式*/
+    
+    .post .pjax article blockquote {
+        padding: 10px 20px;
+        background-color: white;
+        border: none;
+        border-left: 4px solid #42b983;
+        border-right: 4px solid #42b983;
+        border-radius: 10px;
+    }
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+        background: url("http://oncj6b2vl.bkt.clouddn.com/FlSExUGfRSaqxkK5v42CpuI-tXAL.jpg");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+</style>
+</html>
